@@ -2,11 +2,12 @@
 const NodeHelper = require('node_helper');
 const Fetcher = require('./DbFetcher');
 const Promise = require('./vendor/bluebird-3.4.5.min');
-
+//const hafas = require('db-hafas');
 module.exports = NodeHelper.create({
 
     start: function () {
         this.departuresFetchers = []
+
     },
 
     createFetcher: function (config) {
@@ -17,6 +18,7 @@ module.exports = NodeHelper.create({
             fetcher = new Fetcher(config);
             this.departuresFetchers[config.stationId] = fetcher;
             this.sendInit(fetcher);
+	        //hafas.locations('burgdorf').then((stations) => console.log(stations));
             console.log("Transportation fetcher created. (Station ID: " + fetcher.getStationId() + ")");
 
         } else {
